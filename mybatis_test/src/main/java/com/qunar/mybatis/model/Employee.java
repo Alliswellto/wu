@@ -16,9 +16,9 @@ import lombok.*;
 @AllArgsConstructor
 public class Employee {
 
-    private Integer id;
+    private Long id;
 
-    private Integer staffId;
+    private Long staffId;
 
     private String name;
 
@@ -30,7 +30,7 @@ public class Employee {
 
     private Integer isValid;
 
-    public Employee(Integer staffId, String name, String mobile, String area, Integer gender, Integer isValid) {
+    public Employee(Long staffId, String name, String mobile, String area, Integer gender, Integer isValid) {
         this.staffId = staffId;
         this.name = name;
         this.mobile = mobile;

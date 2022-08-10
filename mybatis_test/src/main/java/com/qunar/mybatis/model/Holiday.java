@@ -16,9 +16,9 @@ import lombok.*;
 @AllArgsConstructor
 public class Holiday {
 
-    private Integer id;
+    private Long id;
 
-    private Integer staffId;
+    private Long staffId;
 
     private Integer sickNum;
 

@@ -28,7 +28,7 @@ public interface LeaveHolidayService {
      * @param count
      * @return
      */
-    List<Integer> queryEmployeeAnnualNumLessCount(Integer count);
+    List<Long> queryEmployeeAnnualNumLessCount(Integer count);
 
     /**
      * 10、统计查询工号2，4的已请年假天数和剩余年假天数

@@ -18,9 +18,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class LeaveHoliday {
 
-    private Integer id;
+    private Long id;
 
-    private Integer staffId;
+    private Long staffId;
 
     private Date startDate;
     
@@ -32,7 +32,7 @@ public class LeaveHoliday {
 
     private String area;
 
-    public LeaveHoliday(Integer staffId, Date startDate, Date endDate, Integer dayNum, Integer type, String area) {
+    public LeaveHoliday(Long staffId, Date startDate, Date endDate, Integer dayNum, Integer type, String area) {
         this.staffId = staffId;
         this.startDate = startDate;
         this.endDate = endDate;

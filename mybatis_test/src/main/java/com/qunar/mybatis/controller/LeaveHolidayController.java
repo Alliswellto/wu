@@ -40,7 +40,7 @@ public class LeaveHolidayController {
 
     @RequestMapping("/queryByAnnualNum")
     public void queryEmployeeAnnualNumLessCount() {
-        List<Integer> ids = leaveHolidayService.queryEmployeeAnnualNumLessCount(3);
+        List<Long> ids = leaveHolidayService.queryEmployeeAnnualNumLessCount(3);
         if (ids != null && ids.size() > 0) {
             LOGGER.info("查询成功！");
             ids.forEach(System.out::println);

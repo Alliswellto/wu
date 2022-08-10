@@ -5,6 +5,7 @@ import com.qunar.mybatis.service.EmployeeService;
 import com.qunar.mybatis.service.HolidayService;
 import com.qunar.mybatis.service.LeaveHolidayService;
 import com.qunar.mybatis.utils.DateUtils;
+import com.qunar.mybatis.utils.SnowFlakeIdWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import java.util.Date;
 public class HolidayProcessController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HolidayProcessController.class);
+
+    private static final SnowFlakeIdWorker SNOWFLAKE = new SnowFlakeIdWorker(0, 0);
 
     @Autowired
     private EmployeeService employeeService;
@@ -50,7 +53,8 @@ public class HolidayProcessController {
             return;
         }
         Integer updateCnt = holidayService.updateEmployeeSickNumById(1, 5);
-        LeaveHoliday leaveHoliday = new LeaveHoliday(1, new Date(),
+
+        LeaveHoliday leaveHoliday = new LeaveHoliday(SNOWFLAKE.nextId(), new Date(),
                 DateUtils.dateAdd(new Date(), 5), 5, 2, "北京");
         Integer insertCnt = leaveHolidayService.insertLeaveHolidayDetail(leaveHoliday);
         if (updateCnt > 0 && insertCnt > 0) {

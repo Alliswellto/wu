@@ -29,8 +29,8 @@ public class LeaveHolidayServiceImpl implements LeaveHolidayService {
     }
 
     @Override
-    public List<Integer> queryEmployeeAnnualNumLessCount(Integer count) {
-        List<Integer> cnt = leaveHolidayMapper.queryEmployeeAnnualNumLessCount(count);
+    public List<Long> queryEmployeeAnnualNumLessCount(Integer count) {
+        List<Long> cnt = leaveHolidayMapper.queryEmployeeAnnualNumLessCount(count);
         return cnt;
     }
 

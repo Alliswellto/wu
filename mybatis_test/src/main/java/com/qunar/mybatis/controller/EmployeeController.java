@@ -2,6 +2,7 @@ package com.qunar.mybatis.controller;
 
 import com.qunar.mybatis.model.Employee;
 import com.qunar.mybatis.service.EmployeeService;
+import com.qunar.mybatis.utils.SnowFlakeIdWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ public class EmployeeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
+    private static final SnowFlakeIdWorker SNOWFLAKE = new SnowFlakeIdWorker(0, 0);
+
     @Autowired
     private EmployeeService employeeService;
 
     @RequestMapping("/insert")
     public void insertNewEmployee() {
-        Employee employee = new Employee(8, "韩梅梅",
+        Employee employee = new Employee(8L, "韩梅梅",
                 "19519533333", "北京", 2, 1);
         Integer cnt = employeeService.insertNewEmployee(employee);
         if (cnt <= 0) {
@@ -41,7 +44,14 @@ public class EmployeeController {
     @RequestMapping("/insertTen")
     public void insertTen() {
         for (int i = 0; i < 10; i ++) {
-//            employeeService.insertNewEmployee(new Employee())
+            Employee employee = new Employee(SNOWFLAKE.nextId(), "zs" + i,
+                    "12345678910", "bj" + i, i & 1, i & 1);
+            Integer cnt = employeeService.insertNewEmployee(employee);
+            if (cnt <= 0) {
+                LOGGER.error("插入失败！");
+            } else {
+                LOGGER.info("插入成功");
+            }
         }
     }
 

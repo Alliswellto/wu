@@ -23,7 +23,7 @@
         where staff_id = #{staffId} order by start_date
     </select>
 
-    <select id="queryEmployeeAnnualNumLessCount" resultType="Integer">
+    <select id="queryEmployeeAnnualNumLessCount" resultType="Long">
         select a.staff_id
         from (
             select staff_id, count(day_num) cnt, type

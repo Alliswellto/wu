@@ -33,7 +33,7 @@
     <delete id="deleteEmployeeByValid">
         delete from
            employee
-       where
+        where
            is_valid = #{isValid}
     </delete>
 

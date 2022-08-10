@@ -35,7 +35,7 @@ public interface LeaveHolidayMapper {
      */
 //    @Select(value = "select a.staff_id from (select staff_id, count(day_num) cnt, type from leave_holiday where " +
 //            "type = 1 group by staff_id, type) a where a.cnt < #{count}")
-    List<Integer> queryEmployeeAnnualNumLessCount(@Param("count") Integer count);
+    List<Long> queryEmployeeAnnualNumLessCount(@Param("count") Integer count);
 
     /**
      * 10、统计查询工号2，4的已请年假天数和剩余年假天数
