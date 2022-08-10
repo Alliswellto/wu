@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qunar.mybatis.mapper.EmployeeMapper">
+    <resultMap id="employee" type="Employee">
+        <id column="id" property="id"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="name" property="name"/>
+        <result column="mobile" property="mobile"/>
+        <result column="area" property="area"/>
+        <result column="gender" property="gender"/>
+        <result column="is_valid" property="isValid"/>
+    </resultMap>
+
+    <sql id="baseEmployee">
+        id, staff_id, name, mobile, area, gender, is_valid
+    </sql>
+
+    <insert id="insertNewEmployee" parameterType="Employee">
+        insert into
+            employee(staff_id, name, mobile, area, gender, is_valid)
+        values(#{staffId}, #{name}, #{mobile}, #{area}, #{gender}, #{isValid})
+    </insert>
+
+    <select id="queryEmployeeDetailById" resultMap="employee">
+        select
+            <include refid="baseEmployee"></include>
+        from
+            employee
+        where
+            staff_id = #{staffId}
+    </select>
+
+    <delete id="deleteEmployeeByValid">
+        delete from
+           employee
+       where
+           is_valid = #{isValid}
+    </delete>
+
+    <select id="queryEmployeeCountByName" resultType="Integer">
+        select
+            count(name) cnt
+        from
+            employee
+        where name like '${name}%'
+    </select>
+
+    <select id="queryEmployeeByPage" resultType="employee">
+        select
+        <include refid="baseEmployee"></include>
+        from
+            employee
+        order by staff_id
+        limit #{start}, #{size}
+    </select>
+
+    <select id="queryEmployeeIsValid" resultType="Integer">
+        select is_valid from employee where staff_id = #{staffId}
+    </select>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qunar.mybatis.mapper.LeaveHolidayMapper">
+    <resultMap id="leaveHoliday" type="LeaveHoliday">
+        <id column="id" property="id"/>
+        <result column="staff_id" property="staffId"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="day_num" property="dayNum"/>
+        <result column="type" property="type"/>
+        <result column="area" property="area"/>
+    </resultMap>
+
+    <sql id="baseLeaveHoliday">
+        id, staff_id, start_date, end_date, day_num, type, area
+    </sql>
+
+    <select id="queryEmployeeHolidayDetailById" resultMap="leaveHoliday">
+        select
+            <include refid="baseLeaveHoliday"></include>
+        from
+            leave_holiday
+        where staff_id = #{staffId} order by start_date
+    </select>
+
+    <select id="queryEmployeeAnnualNumLessCount" resultType="Integer">
+        select a.staff_id
+        from (
+            select staff_id, count(day_num) cnt, type
+            from leave_holiday
+            where type = 1 group by staff_id, type
+        ) a
+        where a.cnt &lt; #{count}
+    </select>
+
+    <select id="queryEmployeeHolidayNumById" resultType="java.util.HashMap">
+        select a.staff_id, ifnull(a.annual_num, 0) annual_num, ifnull(b.day_num, 0) day_num
+        from holiday a
+        join (
+            select staff_id, sum(day_num) day_num, type
+            from leave_holiday
+            where staff_id = #{staffId} and type = #{type}
+        ) b
+        on a.staff_id = b.staff_id
+        where annual_num >= 0 or day_num >= 0
+        group by a.staff_id, a.annual_num, b.day_num
+    </select>
+
+    <insert id="insertLeaveHolidayDetail">
+        insert into
+            leave_holiday(staff_id, start_date, end_date, day_num, type, area)
+        values(#{staffId}, #{startDate}, #{endDate}, #{dayNum}, #{type}, #{area})
+    </insert>
+</mapper>
