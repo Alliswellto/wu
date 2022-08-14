@@ -4,12 +4,24 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.231.101:3306/user_manager?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+#    url: jdbc:mysql://192.168.231.101:3306/user_manager?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/user_manager?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
     username: root
     password: root
+  main:
+    allow-circular-references: true
 
 mybatis:
   type-aliases-package: com.qunar.mybatis.model
   configuration:
     map-underscore-to-camel-case: true
+    lazy-loading-enabled: true #开启延时加载开关
+    aggressive-lazy-loading: false #将积极加载改为消极加载（即按需加载）,默认值就是false
+    lazy-load-trigger-methods: "" #阻挡不相干的操作触发，实现懒加载
   mapper-locations: classpath:/mapper/*.xml
+
+#MyBatis使用pageHelper分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true

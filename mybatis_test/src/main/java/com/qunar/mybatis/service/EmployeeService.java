@@ -51,8 +51,9 @@ public interface EmployeeService {
 
     /**
      * 8、分别查询按照工号排名的前1-3名员工和4-6名员工详情(用分页实现)
+     *    Integer start, Integer size
      */
-    List<Employee> queryEmployeeByPage(Integer start, Integer size);
+    List<Employee> queryEmployeeByPage();
 
     /**
      * 11、查询是否在职

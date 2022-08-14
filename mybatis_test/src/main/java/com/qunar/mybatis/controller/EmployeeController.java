@@ -1,5 +1,7 @@
 package com.qunar.mybatis.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qunar.mybatis.model.Employee;
 import com.qunar.mybatis.service.EmployeeService;
 import com.qunar.mybatis.utils.SnowFlakeIdWorker;
@@ -83,17 +85,21 @@ public class EmployeeController {
 
     @RequestMapping("queryByPage")
     public void queryEmployeeByPage() {
+        PageHelper.startPage(1, 3);
+        PageInfo<Employee> pageInfo1 = new PageInfo<>(employeeService.queryEmployeeByPage());
         // 1 - 3
-        List<Employee> employees1 = employeeService.queryEmployeeByPage(0, 3);
-        if (employees1 != null && employees1.size() > 0) {
+//        List<Employee> employees1 = employeeService.queryEmployeeByPage(0, 3);
+        if (pageInfo1.getList() != null && pageInfo1.getList().size() > 0) {
             LOGGER.info("1-3的员工为：");
-            employees1.forEach(System.out::println);
+            pageInfo1.getList().forEach(System.out::println);
         }
         // 4 - 6
-        List<Employee> employees2 = employeeService.queryEmployeeByPage(3, 3);
-        if (employees2 != null && employees2.size() > 0) {
+//        List<Employee> employees2 = employeeService.queryEmployeeByPage(3, 3);
+        PageHelper.startPage(2, 3);
+        PageInfo<Employee> pageInfo2 = new PageInfo<>(employeeService.queryEmployeeByPage());
+        if (pageInfo2.getList() != null && pageInfo2.getList().size() > 0) {
             LOGGER.info("4-6的员工为：");
-            employees2.forEach(System.out::println);
+            pageInfo2.getList().forEach(System.out::println);
         }
     }
 

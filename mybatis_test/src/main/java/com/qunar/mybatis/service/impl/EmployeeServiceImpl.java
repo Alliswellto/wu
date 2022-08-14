@@ -45,8 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> queryEmployeeByPage(Integer start, Integer size) {
-        List<Employee> employees = employeeMapper.queryEmployeeByPage(start, size);
+    public List<Employee> queryEmployeeByPage() {
+        List<Employee> employees = employeeMapper.queryEmployeeByPage();
         return employees;
     }
 

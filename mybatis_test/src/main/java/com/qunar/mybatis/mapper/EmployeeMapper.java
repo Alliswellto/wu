@@ -55,10 +55,11 @@ public interface EmployeeMapper {
 
     /**
      * 8、分别查询按照工号排名的前1-3名员工和4-6名员工详情(用分页实现)
+     *    @Param("start") Integer start, @Param("size") Integer size
      */
 //    @Select(value = "select id, staff_id, name, mobile, area, gender, is_valid from employee " +
 //            "order by staff_id limit #{start}, #{size}")
-    List<Employee> queryEmployeeByPage(@Param("start") Integer start, @Param("size") Integer size);
+    List<Employee> queryEmployeeByPage();
 
     /**
      * 11、一个员工要请病假，请写出具体逻辑实现

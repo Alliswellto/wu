@@ -51,7 +51,6 @@
         from
             employee
         order by staff_id
-        limit #{start}, #{size}
     </select>
 
     <select id="queryEmployeeIsValid" resultType="Integer">
