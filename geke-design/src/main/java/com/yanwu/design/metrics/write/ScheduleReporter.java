@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ClassName SchedulerReporter * @Description TODO
+ * @ClassName SchedulerReporter * @Description 将一个大的聚合任务通过时间片划分为多个
  * @Author tako
  * @Date 19:00 2022/8/14
  * @Version 1.0
@@ -20,6 +20,7 @@ import java.util.Map;
 public class ScheduleReporter {
 
     private static final long MAX_STAT_DURATION_IN_MILLIS = 10 * 60 * 1000; // 10h
+
     protected MetricsStorage metricsStorage;
     protected AggregatorV2 aggregator;
     protected StatViewer viewer;
